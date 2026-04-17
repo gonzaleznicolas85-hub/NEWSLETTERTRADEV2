@@ -3,98 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newsletter Marketing</title>
+    <title>Newsletter Dashboard</title>
     <style>
         /* --- VARIABLES DE DISEÑO --- */
         :root {
             --blue-main: #007BFF;
             --dark-bg: #222222;
             --white: #ffffff;
-            --bg-page: #e9ecef;
+            --bg-page: #f4f6f9; /* Un gris un poco más moderno para fondo de PC */
         }
 
-        /* --- RESET Y FONDO DE PANTALLA --- */
+        /* --- RESET Y FONDO --- */
         body {
             font-family: 'Arial Black', sans-serif;
             background-color: var(--bg-page);
             margin: 0;
             display: flex;
             justify-content: center;
-            padding: 40px 20px; /* Margen superior e inferior para PC */
+            padding: 2vw; /* Espacio dinámico alrededor */
             box-sizing: border-box;
+            min-height: 100vh;
         }
 
-        /* --- CONTENEDOR PRINCIPAL --- */
+        /* --- CONTENEDOR PRINCIPAL (ESTILO PC) --- */
         .container {
             width: 100%;
-            max-width: 700px; /* Ancho ideal para lectura en PC */
+            max-width: 1400px; /* Súper ancho para abarcar pantallas de PC grandes */
             background-color: var(--white);
-            /* Bordes azules solo a los lados, como en tu referencia */
-            border-left: 10px solid var(--blue-main);
-            border-right: 10px solid var(--blue-main);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Sombra elegante */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 12px; /* Bordes redondeados modernos */
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         /* --- CABECERA --- */
         .header {
             background-color: var(--blue-main);
             color: white;
-            padding: 40px;
+            padding: 40px 50px;
             text-align: left;
+            border-bottom: 5px solid var(--dark-bg);
         }
 
         .header h1 { 
             margin: 0; 
-            font-size: clamp(35px, 6vw, 55px); 
+            font-size: clamp(35px, 5vw, 60px); 
             letter-spacing: -1px; 
             text-transform: uppercase;
             line-height: 1;
         }
         
         .header h2 { 
-            margin: 5px 0 0 0; 
-            font-size: clamp(25px, 4vw, 40px); 
+            margin: 10px 0 0 0; 
+            font-size: clamp(20px, 3vw, 35px); 
             font-weight: normal; 
             text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        /* --- SEPARADORES (Cintas negras) --- */
+        /* --- SISTEMA DE GRILLA (La magia para PC vs Móvil) --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Por defecto (Móvil): 1 sola columna */
+            gap: 40px;
+            padding: 40px 50px;
+            background-color: var(--white);
+        }
+
+        /* Cuando la pantalla es mayor a 900px (PC/Tablets grandes), usa 2 columnas */
+        @media (min-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* --- SEPARADORES DE COLUMNA --- */
         .divider-dots {
             background-color: var(--dark-bg);
             color: white;
             text-align: center;
-            padding: 15px 5px;
-            font-size: clamp(14px, 2.5vw, 18px);
-            letter-spacing: 4px;
+            padding: 15px;
+            font-size: clamp(14px, 2vw, 18px);
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-top: -1px; /* Evita líneas blancas no deseadas */
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
 
-        /* --- ZONA DE CONTENIDO --- */
-        .section-content { 
-            padding: 30px 40px; 
-            background-color: var(--white);
-        }
-
-        /* --- NUEVO DISEÑO DE PÍLDORAS (Igual a tu imagen) --- */
+        /* --- PÍLDORAS DE DATOS --- */
         .item-row {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
             background: #ffffff;
             border-radius: 50px;
-            border: 2px solid #eaeaea; /* Borde sutil */
-            padding: 5px 15px 5px 5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-            transition: transform 0.2s;
+            border: 2px solid #eaeaea;
+            padding: 5px 20px 5px 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .item-row:hover {
-            transform: translateY(-2px); /* Pequeño salto al pasar el mouse */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
 
-        /* Círculo oscuro con flecha */
         .icon-circle {
             background-color: #333;
             color: white;
@@ -105,70 +120,64 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            margin-right: 10px;
+            margin-right: 15px;
         }
 
-        /* Etiqueta de color */
         .label-pill {
             padding: 12px 20px;
             color: white;
             border-radius: 30px;
             text-transform: uppercase;
-            font-size: clamp(12px, 2vw, 15px);
+            font-size: clamp(12px, 1.5vw, 15px);
             font-weight: bold;
-            flex-grow: 1; /* Ocupa el espacio del medio */
+            flex-grow: 1;
             text-align: center;
-            box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1); /* Brillo sutil */
+            box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15);
         }
 
-        /* Texto del porcentaje */
         .value-text {
-            padding-left: 15px;
-            font-size: clamp(13px, 2.5vw, 16px);
+            padding-left: 20px;
+            font-size: clamp(14px, 1.8vw, 18px);
             color: #111;
             font-weight: bold;
-            white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+            white-space: nowrap;
         }
 
-        /* --- DISEÑO DE CUADROS (Textos Largos) --- */
+        /* --- CUADROS DE TEXTO --- */
         .info-box {
             border: 3px solid;
             margin-top: 25px;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #ffffff;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.05); /* Sombra dura estilo moderno */
+            padding: 25px;
+            border-radius: 12px;
+            background-color: #fafafa;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.05);
         }
 
         .info-box h4 { 
             margin: 0; 
             text-transform: uppercase; 
-            font-size: clamp(15px, 2.5vw, 18px);
+            font-size: clamp(16px, 2vw, 20px);
         }
         
         .info-box p { 
-            margin: 10px 0 0 0; 
-            font-size: clamp(12px, 2vw, 14px);
+            margin: 12px 0 0 0; 
+            font-size: clamp(13px, 1.5vw, 16px);
             font-family: Arial, Helvetica, sans-serif;
             font-weight: bold; 
-            line-height: 1.5; 
-            color: #333;
+            line-height: 1.6; 
+            color: #444;
         }
 
-        /* --- ADAPTABILIDAD PARA CELULARES --- */
+        /* --- ADAPTABILIDAD PARA MÓVILES --- */
         @media (max-width: 600px) {
             body { padding: 0; background-color: var(--white); }
-            .container { 
-                border-left: none; 
-                border-right: none; 
-                box-shadow: none; 
-            }
-            .header { padding: 25px 20px; }
-            .section-content { padding: 20px 15px; }
-            .item-row { padding: 4px 10px 4px 4px; }
-            .icon-circle { min-width: 35px; height: 35px; font-size: 16px; margin-right: 5px; }
-            .label-pill { padding: 10px; font-size: 11px; }
-            .value-text { font-size: 12px; padding-left: 8px; }
+            .container { border-radius: 0; box-shadow: none; }
+            .header { padding: 30px 20px; }
+            .content-grid { padding: 20px 15px; gap: 30px; }
+            .item-row { padding: 4px 10px 4px 4px; border-radius: 40px; }
+            .icon-circle { min-width: 35px; height: 35px; font-size: 16px; margin-right: 8px; }
+            .label-pill { padding: 10px 15px; font-size: 11px; }
+            .value-text { font-size: 12px; padding-left: 10px; }
         }
     </style>
 </head>
@@ -176,33 +185,45 @@
 
 <div class="container">
     <div class="header">
-        <h1 id="main-title">CARGANDO...</h1>
-        <h2 id="sub-title">---</h2>
+        <h1 id="main-title">CONECTANDO...</h1>
+        <h2 id="sub-title">Buscando datos</h2>
     </div>
 
-    <div class="divider-dots">✦ ✦ PROGRAMA DE MERCADO ✦ ✦</div>
-    <div class="section-content" id="content-programa">
+    <div class="content-grid">
+        <div class="column">
+            <div class="divider-dots">✦ PROGRAMA DE MERCADO ✦</div>
+            <div id="content-programa">
+                </div>
         </div>
 
-    <div class="divider-dots">⚽ LIGA DE EJECUCIÓN ⚽</div>
-    <div class="section-content" id="content-liga">
+        <div class="column">
+            <div class="divider-dots">⚽ LIGA DE EJECUCIÓN ⚽</div>
+            <div id="content-liga">
+                </div>
         </div>
+    </div>
 </div>
 
 <script>
-    // IMPORTANTE: REEMPLAZA ESTO CON TU URL DE APPS SCRIPT
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw65sEdKZmLCnR9fYjuawnZnLTWfCkgFHn4hcJsdvCU2Yan_98hO8EHOP3THe-1jWDX/exec';
+    // ⚠️ PEGA AQUÍ LA NUEVA URL (La que generaste en el Paso 1)
+    const WEB_APP_URL = 'TU_URL_DE_APPS_SCRIPT_AQUI';
 
     async function init() {
         try {
             const res = await fetch(WEB_APP_URL);
+            
+            // Verificamos si la respuesta de red es correcta
+            if (!res.ok) {
+                throw new Error("Error en la red. Código: " + res.status);
+            }
+
             const data = await res.json();
 
-            // 1. Textos Generales
+            // Títulos
             document.getElementById('main-title').innerText = data.config.TITULO_PRINCIPAL || "RESUMEN";
             document.getElementById('sub-title').innerText = data.config.SUBTITULO_FECHA || "";
 
-            // 2. Colores Dinámicos
+            // Colores
             if(data.config.COLOR_BORDE_Y_HEADER) {
                 document.documentElement.style.setProperty('--blue-main', data.config.COLOR_BORDE_Y_HEADER);
             }
@@ -213,24 +234,23 @@
                 document.documentElement.style.setProperty('--bg-page', data.config.COLOR_FONDO_PAGINA);
             }
 
-            // 3. Renderizar Contenido
+            // Contenedores
             const programaDiv = document.getElementById('content-programa');
             const ligaDiv = document.getElementById('content-liga');
             programaDiv.innerHTML = "";
             ligaDiv.innerHTML = "";
 
+            // Llenado
             data.content.forEach(item => {
                 let container = (item.seccion === 'PROGRAMA DE MERCADO') ? programaDiv : ligaDiv;
                 
                 if (!item.valor.includes('%') || item.valor.length > 40) {
-                    // CUADROS DE TEXTO LARGOS
                     container.innerHTML += `
                         <div class="info-box" style="border-color: ${item.color}">
                             <h4 style="color: ${item.color}">${item.etiqueta}</h4>
                             <p>${item.valor}</p>
                         </div>`;
                 } else {
-                    // PÍLDORAS CON ÍCONO (Nuevo diseño adaptado)
                     container.innerHTML += `
                         <div class="item-row">
                             <div class="icon-circle">➔</div>
@@ -239,10 +259,11 @@
                         </div>`;
                 }
             });
+
         } catch (err) {
-            console.error("Error cargando datos:", err);
-            document.getElementById('main-title').innerText = "ERROR";
-            document.getElementById('sub-title').innerText = "Verifica la conexión";
+            console.error("Detalle del error:", err);
+            document.getElementById('main-title').innerText = "ERROR DE CONEXIÓN";
+            document.getElementById('sub-title').innerText = "Verifica la URL en el código o publica una nueva versión en Apps Script.";
         }
     }
 
