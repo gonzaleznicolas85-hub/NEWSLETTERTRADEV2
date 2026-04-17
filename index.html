@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Marketing</title>
+    <style>
+        /* --- VARIABLES DE DISEÑO --- */
+        :root {
+            --blue-main: #007BFF;
+            --dark-bg: #222222;
+            --white: #ffffff;
+            --bg-page: #e9ecef;
+        }
+
+        /* --- RESET Y FONDO DE PANTALLA --- */
+        body {
+            font-family: 'Arial Black', sans-serif;
+            background-color: var(--bg-page);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px; /* Margen superior e inferior para PC */
+            box-sizing: border-box;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            width: 100%;
+            max-width: 700px; /* Ancho ideal para lectura en PC */
+            background-color: var(--white);
+            /* Bordes azules solo a los lados, como en tu referencia */
+            border-left: 10px solid var(--blue-main);
+            border-right: 10px solid var(--blue-main);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Sombra elegante */
+            overflow: hidden;
+        }
+
+        /* --- CABECERA --- */
+        .header {
+            background-color: var(--blue-main);
+            color: white;
+            padding: 40px;
+            text-align: left;
+        }
+
+        .header h1 { 
+            margin: 0; 
+            font-size: clamp(35px, 6vw, 55px); 
+            letter-spacing: -1px; 
+            text-transform: uppercase;
+            line-height: 1;
+        }
+        
+        .header h2 { 
+            margin: 5px 0 0 0; 
+            font-size: clamp(25px, 4vw, 40px); 
+            font-weight: normal; 
+            text-transform: uppercase;
+        }
+
+        /* --- SEPARADORES (Cintas negras) --- */
+        .divider-dots {
+            background-color: var(--dark-bg);
+            color: white;
+            text-align: center;
+            padding: 15px 5px;
+            font-size: clamp(14px, 2.5vw, 18px);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: -1px; /* Evita líneas blancas no deseadas */
+        }
+
+        /* --- ZONA DE CONTENIDO --- */
+        .section-content { 
+            padding: 30px 40px; 
+            background-color: var(--white);
+        }
+
+        /* --- NUEVO DISEÑO DE PÍLDORAS (Igual a tu imagen) --- */
+        .item-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #ffffff;
+            border-radius: 50px;
+            border: 2px solid #eaeaea; /* Borde sutil */
+            padding: 5px 15px 5px 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+        }
+
+        .item-row:hover {
+            transform: translateY(-2px); /* Pequeño salto al pasar el mouse */
+        }
+
+        /* Círculo oscuro con flecha */
+        .icon-circle {
+            background-color: #333;
+            color: white;
+            min-width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        /* Etiqueta de color */
+        .label-pill {
+            padding: 12px 20px;
+            color: white;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-size: clamp(12px, 2vw, 15px);
+            font-weight: bold;
+            flex-grow: 1; /* Ocupa el espacio del medio */
+            text-align: center;
+            box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1); /* Brillo sutil */
+        }
+
+        /* Texto del porcentaje */
+        .value-text {
+            padding-left: 15px;
+            font-size: clamp(13px, 2.5vw, 16px);
+            color: #111;
+            font-weight: bold;
+            white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+        }
+
+        /* --- DISEÑO DE CUADROS (Textos Largos) --- */
+        .info-box {
+            border: 3px solid;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.05); /* Sombra dura estilo moderno */
+        }
+
+        .info-box h4 { 
+            margin: 0; 
+            text-transform: uppercase; 
+            font-size: clamp(15px, 2.5vw, 18px);
+        }
+        
+        .info-box p { 
+            margin: 10px 0 0 0; 
+            font-size: clamp(12px, 2vw, 14px);
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold; 
+            line-height: 1.5; 
+            color: #333;
+        }
+
+        /* --- ADAPTABILIDAD PARA CELULARES --- */
+        @media (max-width: 600px) {
+            body { padding: 0; background-color: var(--white); }
+            .container { 
+                border-left: none; 
+                border-right: none; 
+                box-shadow: none; 
+            }
+            .header { padding: 25px 20px; }
+            .section-content { padding: 20px 15px; }
+            .item-row { padding: 4px 10px 4px 4px; }
+            .icon-circle { min-width: 35px; height: 35px; font-size: 16px; margin-right: 5px; }
+            .label-pill { padding: 10px; font-size: 11px; }
+            .value-text { font-size: 12px; padding-left: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 id="main-title">CARGANDO...</h1>
+        <h2 id="sub-title">---</h2>
+    </div>
+
+    <div class="divider-dots">✦ ✦ PROGRAMA DE MERCADO ✦ ✦</div>
+    <div class="section-content" id="content-programa">
+        </div>
+
+    <div class="divider-dots">⚽ LIGA DE EJECUCIÓN ⚽</div>
+    <div class="section-content" id="content-liga">
+        </div>
+</div>
+
+<script>
+    // IMPORTANTE: REEMPLAZA ESTO CON TU URL DE APPS SCRIPT
+    const WEB_APP_URL = 'TU_URL_DE_APPS_SCRIPT_AQUI';
+
+    async function init() {
+        try {
+            const res = await fetch(WEB_APP_URL);
+            const data = await res.json();
+
+            // 1. Textos Generales
+            document.getElementById('main-title').innerText = data.config.TITULO_PRINCIPAL || "RESUMEN";
+            document.getElementById('sub-title').innerText = data.config.SUBTITULO_FECHA || "";
+
+            // 2. Colores Dinámicos
+            if(data.config.COLOR_BORDE_Y_HEADER) {
+                document.documentElement.style.setProperty('--blue-main', data.config.COLOR_BORDE_Y_HEADER);
+            }
+            if(data.config.COLOR_BARRAS_SEPARADORAS) {
+                document.documentElement.style.setProperty('--dark-bg', data.config.COLOR_BARRAS_SEPARADORAS);
+            }
+            if(data.config.COLOR_FONDO_PAGINA) {
+                document.documentElement.style.setProperty('--bg-page', data.config.COLOR_FONDO_PAGINA);
+            }
+
+            // 3. Renderizar Contenido
+            const programaDiv = document.getElementById('content-programa');
+            const ligaDiv = document.getElementById('content-liga');
+            programaDiv.innerHTML = "";
+            ligaDiv.innerHTML = "";
+
+            data.content.forEach(item => {
+                let container = (item.seccion === 'PROGRAMA DE MERCADO') ? programaDiv : ligaDiv;
+                
+                if (!item.valor.includes('%') || item.valor.length > 40) {
+                    // CUADROS DE TEXTO LARGOS
+                    container.innerHTML += `
+                        <div class="info-box" style="border-color: ${item.color}">
+                            <h4 style="color: ${item.color}">${item.etiqueta}</h4>
+                            <p>${item.valor}</p>
+                        </div>`;
+                } else {
+                    // PÍLDORAS CON ÍCONO (Nuevo diseño adaptado)
+                    container.innerHTML += `
+                        <div class="item-row">
+                            <div class="icon-circle">➔</div>
+                            <div class="label-pill" style="background-color: ${item.color}">${item.etiqueta}</div>
+                            <div class="value-text">${item.valor}</div>
+                        </div>`;
+                }
+            });
+        } catch (err) {
+            console.error("Error cargando datos:", err);
+            document.getElementById('main-title').innerText = "ERROR";
+            document.getElementById('sub-title').innerText = "Verifica la conexión";
+        }
+    }
+
+    init();
+</script>
+</body>
+</html>
